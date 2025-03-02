@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Volume Control</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #startButton {
+            width: 100%;
+            height: 100%;
+            font-size: 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="startButton">Start</button>
+    <audio id="audio" src="piaterka-krichit-zatknis.mp3" loop></audio>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const startButton = document.getElementById('startButton');
+
+        startButton.addEventListener('click', () => {
+            audio.play();
+            increaseVolume();
+        });
+
+        function increaseVolume() {
+            let volume = 0;
+            const interval = setInterval(() => {
+                if (volume < 1) {
+                    volume += 0.1;
+                    audio.volume = volume;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
